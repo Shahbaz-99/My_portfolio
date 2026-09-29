@@ -1,0 +1,11 @@
+---
+import { site } from '../data/site';
+---
+<section class="block" aria-labelledby="h-gh">
+  <h2 id="h-gh">Latest on GitHub</h2>
+  <p class="lede" data-gh-status>Recent public repositories, pulled live from GitHub.</p>
+  <ul class="rows" data-gh-list data-user={site.githubUser}></ul>
+  <p><a href={site.github}>All repositories</a></p>
+</section>
+
+<script>import '../scripts/github';</script>

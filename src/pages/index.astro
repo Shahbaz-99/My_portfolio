@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import GitHubActivity from '../components/GitHubActivity.astro';
 import { site, projects, experience, skills, education, aiWork } from '../data/site';
 const entries: [string, string | string[]][] = [
   ['name', site.name],
@@ -60,6 +61,8 @@ const last = entries.length - 1;
       ))}
     </ul>
   </section>
+
+  <GitHubActivity />
 
   <section class="block exp" id="experience" aria-labelledby="h-exp">
     <h2 id="h-exp">Experience</h2>

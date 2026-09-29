@@ -5,7 +5,11 @@ export const site = {
   headline: 'Backend engineer building reliable APIs, now adding AI to them.',
   intro:
     'I design and ship REST APIs with Django and Django REST Framework, containerize them with Docker, and deploy them on Linux servers. I am a final-year B.Tech student and a backend intern.',
+  // Display name matches official ID (Sahbaj); goes by Shahbaz in person.
   location: 'Bhopal, India',
+  city: 'Bhopal',
+  timezone: 'Asia/Kolkata',
+  githubUser: 'Shahbaz-99',
   email: 'sahbaj.swn@gmail.com',
   github: 'https://github.com/Shahbaz-99',
   linkedin: '', // add URL to show it
