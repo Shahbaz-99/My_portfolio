@@ -15,14 +15,14 @@ function render(repos: Repo[]) {
   if (!repos.length) { if (status) status.textContent = 'No public repositories to show yet.'; return; }
   for (const r of repos) {
     if (!r.html_url.startsWith('https://github.com/')) continue;
-    const li = document.createElement('li'); li.className = 'row';
-    const h = document.createElement('h3'); const a = document.createElement('a');
-    a.href = r.html_url; a.textContent = r.name; h.append(a);
-    const box = document.createElement('div');
-    const p = document.createElement('p'); p.textContent = r.description ?? 'No description yet.';
-    const m = document.createElement('p'); m.className = 'meta';
-    m.textContent = [r.language, `updated ${ago(r.pushed_at)}`].filter(Boolean).join(', ');
-    box.append(p, m); li.append(h, box); list.append(li);
+    const li = document.createElement('li');
+    const line = document.createElement('div'); line.className = 'line';
+    const a = document.createElement('a'); a.href = r.html_url; a.textContent = `${r.name} \u2197`;
+    const when = document.createElement('span'); when.className = 'when'; when.textContent = ago(r.pushed_at);
+    line.append(a, when); li.append(line);
+    const d = document.createElement('p'); d.className = 'desc';
+    d.textContent = [r.description, r.language].filter(Boolean).join(' \u00b7 ') || 'No description yet.';
+    li.append(d); list.append(li);
   }
 }
 

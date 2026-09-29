@@ -17,8 +17,8 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
 });
 sync();
 
-// Active section in nav
-const links = [...document.querySelectorAll<HTMLAnchorElement>('.nav a[href^="/#"]')];
+// Active section in dock
+const links = [...document.querySelectorAll<HTMLAnchorElement>('.dock a[href^="/#"]')];
 if (links.length && 'IntersectionObserver' in window) {
   const byId = new Map(links.map((a) => [a.hash.slice(1), a]));
   const io = new IntersectionObserver((entries) => {
@@ -31,15 +31,15 @@ if (links.length && 'IntersectionObserver' in window) {
   byId.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
 }
 
-// Live local time
+// Live clock (seconds)
 const clocks = document.querySelectorAll<HTMLElement>('[data-clock]');
 if (clocks.length) {
   const tick = () => clocks.forEach((el) => {
     try {
-      el.textContent = new Intl.DateTimeFormat('en-IN', { hour: 'numeric', minute: '2-digit', timeZone: el.dataset.clock }).format(new Date());
-      el.closest('[data-clock-wrap]')?.removeAttribute('hidden');
+      el.textContent = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', second: '2-digit', timeZone: el.dataset.clock }).format(new Date());
+      el.closest('[data-clock-wrap]')?.setAttribute('data-ready', '');
     } catch {}
   });
   tick();
-  setInterval(tick, 30000);
+  setInterval(tick, 1000);
 }

@@ -2,6 +2,10 @@
 
 Newest entry on top.
 
+## Phase 5 – Visual direction v2 (paper, dock, handwritten greeting)
+**Done:** redesigned to a paper-texture look: handwritten greeting, tilted photo frame, live IST clock with seconds, icon chips, 2-up project cards with tinted covers, dashed-line experience timeline, wavy-divider lists, floating bottom dock (home, projects, about, AI, theme toggle) with active red dot. Light and dark themes kept; layout is a single 46rem column, 1-col on phones. Removed the API-response hero and JetBrains Mono. ADR 0006.
+**Open:** add `photo` (e.g. /me.jpg), `year` per project, LinkedIn URL, resume PDF, real project links; first AI project.
+
 ## Phase 4 – Dynamic features and theming
 **Done:** light/dark toggle (system default, remembered, no flash), scroll-spy nav, live Bhopal time, live "Latest on GitHub" section, responsive header and ultra-wide/tiny-screen tweaks, ADR 0005.
 **Decisions:** display name stays "Sahbaj Ali" (matches official ID); goes by Shahbaz.

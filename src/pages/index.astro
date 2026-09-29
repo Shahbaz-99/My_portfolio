@@ -1,108 +1,70 @@
 ---
 import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import GitHubActivity from '../components/GitHubActivity.astro';
-import { site, projects, experience, skills, education, aiWork } from '../data/site';
-const entries: [string, string | string[]][] = [
-  ['name', site.name],
-  ['role', site.role],
-  ['stack', site.response.stack],
-  ['ships', site.response.ships],
-  ['learning', site.response.learning],
-  ['location', site.location],
-  ['open_to', site.openTo],
-];
-const last = entries.length - 1;
+import { site, projects, timeline, skills, aiWork } from '../data/site';
+const stack = skills.flatMap((s) => s.items).join(', ');
 ---
 <Base>
-  <section class="hero" aria-labelledby="top">
-    <div>
-      <h1 id="top">{site.headline}</h1>
-      <p>{site.intro}</p>
-      <div class="actions">
-        <a class="btn" href={`mailto:${site.email}`}>Email me</a>
-        <a href={site.github}>GitHub</a>
-        {site.linkedin && <a href={site.linkedin}>LinkedIn</a>}
-        {site.resumeUrl && <a href={site.resumeUrl}>Resume (PDF)</a>}
-      </div>
+  <section id="top" class="hero">
+    <div class="polaroid">
+      {site.photo ? <img src={site.photo} alt={`Portrait of ${site.name}`} width="76" height="76" /> : <span class="ph" aria-hidden="true">{site.initials}</span>}
     </div>
-    <pre class="resp" aria-label="Sample API response describing me"><code>
-      <span class="ln req" style="--i:0">GET /engineer</span>
-      <span class="ln status" style="--i:1">200 OK</span>
-      <span class="ln p" style="--i:2">{'{'}</span>
-      {entries.map(([k, v], i) => (
-        <span class="ln in" style={`--i:${i + 3}`}>
-          <span class="k">"{k}"</span><span class="p">: </span>
-          {Array.isArray(v)
-            ? <><span class="p">[</span>{v.map((x, j) => <><span class="s">"{x}"</span>{j < v.length - 1 && <span class="p">, </span>}</>)}<span class="p">]</span></>
-            : <span class="s">"{v}"</span>}
-          {i < last && <span class="p">,</span>}
-        </span>
-      ))}
-      <span class="ln p" style={`--i:${entries.length + 3}`}>{'}'}</span>
-    </code></pre>
+    <div class="greet">
+      <h1 class="hello">{site.name.split(' ')[0]} here!</h1>
+      <span class="clock" data-clock-wrap aria-hidden="true"><span data-clock={site.timezone}></span> {site.tzLabel}</span>
+    </div>
+    <p>A backend engineer building REST APIs with Django and turning messy requirements into reliable, well-documented services.</p>
+    <p>Currently interning at {timeline[0].name}, where I ship Dockerized APIs to Linux servers. Learning AI engineering and Kubernetes next.</p>
+    <p>Most of my code lives on <a class="wavy" href={site.github}>GitHub</a>.</p>
+    <div class="chips">
+      <a class="chip" href={`mailto:${site.email}`} aria-label="Email"><Icon name="mail" /></a>
+      {site.linkedin && <a class="chip" href={site.linkedin} aria-label="LinkedIn"><Icon name="linkedin" /></a>}
+      <a class="chip" href={site.github} aria-label="GitHub"><Icon name="code" /></a>
+      {site.resumeUrl && <a class="chip" href={site.resumeUrl} aria-label="Resume (PDF)"><Icon name="file" /></a>}
+    </div>
   </section>
 
-  <section class="block" id="projects" aria-labelledby="h-projects">
-    <h2 id="h-projects">Projects</h2>
-    <ul class="rows">
-      {projects.map((p) => (
-        <li class="row">
-          <h3>{p.title}</h3>
+  <section id="projects" class="block" aria-labelledby="h-projects">
+    <h2 class="label" id="h-projects">Best projects</h2>
+    <div class="cards">{projects.map((p, i) => <ProjectCard p={p} i={i} />)}</div>
+    <GitHubActivity />
+  </section>
+
+  <section id="about" class="block" aria-labelledby="h-exp">
+    <h2 class="label" id="h-exp">Experience</h2>
+    <ul class="tl">
+      {timeline.map((t) => (
+        <li>
+          <span class="mono" aria-hidden="true">{t.mono}</span>
           <div>
-            <p>{p.summary}</p>
-            <p class="meta">{p.stack.join(', ')}</p>
-            <div class="links">
-              {p.problem && <a href={`/projects/${p.slug}`}>Read the case study</a>}
-              {p.repo && <a href={p.repo}>Source</a>}
-              {p.demo && <a href={p.demo}>Live demo</a>}
+            <div class="top">
+              <span class="name">{t.url ? <a class="wavy" href={t.url}>{t.name}</a> : t.name}</span>
+              <span class="when">{t.when}</span>
             </div>
+            <div class="role">{t.role}</div>
+            <p>{t.text}</p>
           </div>
         </li>
       ))}
     </ul>
+    <p class="meta">Stack: {stack}</p>
   </section>
 
-  <GitHubActivity />
-
-  <section class="block exp" id="experience" aria-labelledby="h-exp">
-    <h2 id="h-exp">Experience</h2>
-    <h3>{experience.role}, {experience.org}</h3>
-    <p class="meta">{experience.period}</p>
-    <ul>{experience.points.map((t) => <li>{t}</li>)}</ul>
-  </section>
-
-  <section class="block" aria-labelledby="h-skills">
-    <h2 id="h-skills">Skills</h2>
-    <dl class="skills">
-      {skills.map((s) => (<div><dt>{s.group}</dt><dd>{s.items.join(', ')}</dd></div>))}
-    </dl>
-  </section>
-
-  <section class="block" id="ai" aria-labelledby="h-ai">
-    <h2 id="h-ai">AI</h2>
+  <section id="ai" class="block" aria-labelledby="h-ai">
+    <h2 class="label" id="h-ai">AI work</h2>
     {aiWork.length === 0 ? (
-      <p class="lede">I am adding AI engineering to my backend work. Projects will appear here as I ship them, each with source and a write-up.</p>
+      <p class="empty">I am adding AI engineering to my backend work. Projects will appear here as I ship them, each with source and a write-up.</p>
     ) : (
-      <ul class="rows">
+      <ul class="list">
         {aiWork.map((a) => (
-          <li class="row"><h3>{a.title}</h3><div><p>{a.summary}</p>{a.href && <a href={a.href}>Open</a>}</div></li>
+          <li>
+            <div class="line">{a.href ? <a href={a.href}>{a.title} {'\u2197'}</a> : <span>{a.title}</span>}</div>
+            <p class="desc">{a.summary}</p>
+          </li>
         ))}
       </ul>
     )}
-  </section>
-
-  <section class="block" aria-labelledby="h-edu">
-    <h2 id="h-edu">Education</h2>
-    <p>{education.degree}, {education.school}. <span class="meta">{education.period}</span></p>
-  </section>
-
-  <section class="block" id="contact" aria-labelledby="h-contact">
-    <h2 id="h-contact">Contact</h2>
-    <p class="lede">I am open to {site.openTo}. Email is the fastest way to reach me.</p>
-    <div class="actions">
-      <a class="btn" href={`mailto:${site.email}`}>Email {site.email}</a>
-      <a href={site.github}>GitHub</a>
-      {site.linkedin && <a href={site.linkedin}>LinkedIn</a>}
-    </div>
   </section>
 </Base>

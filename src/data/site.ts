@@ -9,6 +9,9 @@ export const site = {
   location: 'Bhopal, India',
   city: 'Bhopal',
   timezone: 'Asia/Kolkata',
+  tzLabel: 'IST',
+  photo: '', // e.g. '/me.jpg' (square, put file in /public); empty shows initials
+  initials: 'SA',
   githubUser: 'Shahbaz-99',
   email: 'sahbaj.swn@gmail.com',
   github: 'https://github.com/Shahbaz-99',
@@ -24,6 +27,7 @@ export const site = {
 
 export type Project = {
   slug: string;
+  year?: string; // e.g. '2025', shown on the card cover
   title: string;
   summary: string;
   stack: string[];
@@ -52,17 +56,24 @@ export const projects: Project[] = [
   },
 ];
 
-export const experience = {
-  role: 'Python Backend Developer Intern',
-  org: 'Ethical Intelligence, Bhopal',
-  period: 'Aug 2025 to present',
-  points: [
-    'Built and maintained REST APIs with Django and Django REST Framework.',
-    'Designed database models and optimized application performance.',
-    'Containerized applications with Docker and deployed them on Linux VPS servers.',
-    'Worked with Git and GitHub, CI/CD workflows, and Kubernetes fundamentals in a team.',
-  ],
-};
+export const timeline = [
+  {
+    name: 'Ethical Intelligence',
+    mono: 'EI',
+    role: 'Python Backend Developer Intern',
+    when: 'Aug 2025 - Present',
+    text: 'Built and maintained Django REST APIs, designed database models, and shipped Dockerized services to Linux VPS servers.',
+    url: '',
+  },
+  {
+    name: 'All Saints College of Technology',
+    mono: 'AS',
+    role: 'B.Tech, Computer Science Engineering',
+    when: '2023 - 2027',
+    text: 'RGPV University, Bhopal.',
+    url: '',
+  },
+];
 
 export const skills = [
   { group: 'Backend', items: ['Python', 'Django', 'Django REST Framework', 'REST APIs'] },

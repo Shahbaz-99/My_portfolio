@@ -1,11 +1,18 @@
 ---
 import '@fontsource-variable/instrument-sans';
-import '@fontsource-variable/jetbrains-mono';
+import '@fontsource-variable/caveat';
 import '../styles/global.css';
+import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
 interface Props { title?: string; description?: string }
 const { title, description = `${site.name}, ${site.role}. ${site.headline}` } = Astro.props;
 const full = title ? `${title} | ${site.name}` : `${site.name} | ${site.role}`;
+const nav = [
+  { href: '/#top', icon: 'home', label: 'Home' },
+  { href: '/#projects', icon: 'grid', label: 'Projects' },
+  { href: '/#about', icon: 'user', label: 'About' },
+  { href: '/#ai', icon: 'brush', label: 'AI work' },
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -30,26 +37,30 @@ const full = title ? `${title} | ${site.name}` : `${site.name} | ${site.role}`;
   <body>
     <a class="skip" href="#main">Skip to content</a>
     <div class="wrap">
-      <header class="site-header">
-        <a class="brand" href="/">{site.name}</a>
-        <nav class="nav" aria-label="Main">
-          <a href="/#projects">Projects</a>
-          <a href="/#experience">Experience</a>
-          <a href="/#ai">AI</a>
-          <a href="/architecture">How this site is built</a>
-          <a href="/#contact">Contact</a>
-        </nav>
-        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
-          <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-          <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-        </button>
-      </header>
       <main id="main"><slot /></main>
       <footer class="site-footer">
-        <p>{site.name}, {site.location}<span data-clock-wrap hidden>. Local time <span data-clock={site.timezone}></span></span></p>
-        <p>Static site on Cloudflare Pages. <a href="/architecture">See the architecture</a>.</p>
+        <svg class="doodle" viewBox="0 0 160 90" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" aria-hidden="true">
+          <path d="M34 88c2-20 0-34 1-50M72 88c-1-24 2-40 0-56M120 88c2-18 4-28 6-42"/>
+          {[[35, 32], [72, 22], [126, 40]].map(([x, y]) => (
+            <g transform={`translate(${x} ${y})`}><circle r="2.5"/>{[0, 60, 120, 180, 240, 300].map((a) => <ellipse cx="0" cy="-7" rx="2.6" ry="5" transform={`rotate(${a})`}/>)}</g>
+          ))}
+        </svg>
+        <p>Built with Astro on Cloudflare Pages. <a class="wavy" href="/architecture">How it's built</a></p>
+        <div class="chips">
+          <a class="chip" href={`mailto:${site.email}`} aria-label="Email"><Icon name="mail" /></a>
+          {site.linkedin && <a class="chip" href={site.linkedin} aria-label="LinkedIn"><Icon name="linkedin" /></a>}
+          <a class="chip" href={site.github} aria-label="GitHub"><Icon name="code" /></a>
+        </div>
       </footer>
     </div>
+    <nav class="dock" aria-label="Main">
+      <div class="dock-items">
+        {nav.map((n) => <a href={n.href} aria-label={n.label} title={n.label}><Icon name={n.icon} /></a>)}
+        <span class="sep" aria-hidden="true"></span>
+        <button type="button" data-theme-toggle aria-label="Switch theme"><Icon class="sun" name="sun" /><Icon class="moon" name="moon" /></button>
+      </div>
+      <div class="ruler" aria-hidden="true"></div>
+    </nav>
     <script>import '../scripts/ui';</script>
   </body>
 </html>
