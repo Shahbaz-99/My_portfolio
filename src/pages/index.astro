@@ -1,17 +1,105 @@
 ---
-
+import Base from '../layouts/Base.astro';
+import { site, projects, experience, skills, education, aiWork } from '../data/site';
+const entries: [string, string | string[]][] = [
+  ['name', site.name],
+  ['role', site.role],
+  ['stack', site.response.stack],
+  ['ships', site.response.ships],
+  ['learning', site.response.learning],
+  ['location', site.location],
+  ['open_to', site.openTo],
+];
+const last = entries.length - 1;
 ---
+<Base>
+  <section class="hero" aria-labelledby="top">
+    <div>
+      <h1 id="top">{site.headline}</h1>
+      <p>{site.intro}</p>
+      <div class="actions">
+        <a class="btn" href={`mailto:${site.email}`}>Email me</a>
+        <a href={site.github}>GitHub</a>
+        {site.linkedin && <a href={site.linkedin}>LinkedIn</a>}
+        {site.resumeUrl && <a href={site.resumeUrl}>Resume (PDF)</a>}
+      </div>
+    </div>
+    <pre class="resp" aria-label="Sample API response describing me"><code>
+      <span class="ln req" style="--i:0">GET /engineer</span>
+      <span class="ln status" style="--i:1">200 OK</span>
+      <span class="ln p" style="--i:2">{'{'}</span>
+      {entries.map(([k, v], i) => (
+        <span class="ln in" style={`--i:${i + 3}`}>
+          <span class="k">"{k}"</span><span class="p">: </span>
+          {Array.isArray(v)
+            ? <><span class="p">[</span>{v.map((x, j) => <><span class="s">"{x}"</span>{j < v.length - 1 && <span class="p">, </span>}</>)}<span class="p">]</span></>
+            : <span class="s">"{v}"</span>}
+          {i < last && <span class="p">,</span>}
+        </span>
+      ))}
+      <span class="ln p" style={`--i:${entries.length + 3}`}>{'}'}</span>
+    </code></pre>
+  </section>
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+  <section class="block" id="projects" aria-labelledby="h-projects">
+    <h2 id="h-projects">Projects</h2>
+    <ul class="rows">
+      {projects.map((p) => (
+        <li class="row">
+          <h3>{p.title}</h3>
+          <div>
+            <p>{p.summary}</p>
+            <p class="meta">{p.stack.join(', ')}</p>
+            <div class="links">
+              {p.problem && <a href={`/projects/${p.slug}`}>Read the case study</a>}
+              {p.repo && <a href={p.repo}>Source</a>}
+              {p.demo && <a href={p.demo}>Live demo</a>}
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="block exp" id="experience" aria-labelledby="h-exp">
+    <h2 id="h-exp">Experience</h2>
+    <h3>{experience.role}, {experience.org}</h3>
+    <p class="meta">{experience.period}</p>
+    <ul>{experience.points.map((t) => <li>{t}</li>)}</ul>
+  </section>
+
+  <section class="block" aria-labelledby="h-skills">
+    <h2 id="h-skills">Skills</h2>
+    <dl class="skills">
+      {skills.map((s) => (<div><dt>{s.group}</dt><dd>{s.items.join(', ')}</dd></div>))}
+    </dl>
+  </section>
+
+  <section class="block" id="ai" aria-labelledby="h-ai">
+    <h2 id="h-ai">AI</h2>
+    {aiWork.length === 0 ? (
+      <p class="lede">I am adding AI engineering to my backend work. Projects will appear here as I ship them, each with source and a write-up.</p>
+    ) : (
+      <ul class="rows">
+        {aiWork.map((a) => (
+          <li class="row"><h3>{a.title}</h3><div><p>{a.summary}</p>{a.href && <a href={a.href}>Open</a>}</div></li>
+        ))}
+      </ul>
+    )}
+  </section>
+
+  <section class="block" aria-labelledby="h-edu">
+    <h2 id="h-edu">Education</h2>
+    <p>{education.degree}, {education.school}. <span class="meta">{education.period}</span></p>
+  </section>
+
+  <section class="block" id="contact" aria-labelledby="h-contact">
+    <h2 id="h-contact">Contact</h2>
+    <p class="lede">I am open to {site.openTo}. Email is the fastest way to reach me.</p>
+    <div class="actions">
+      <a class="btn" href={`mailto:${site.email}`}>Email {site.email}</a>
+      <a href={site.github}>GitHub</a>
+      {site.linkedin && <a href={site.linkedin}>LinkedIn</a>}
+    </div>
+  </section>
+</Base>

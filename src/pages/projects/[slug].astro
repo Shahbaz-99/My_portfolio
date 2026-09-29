@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import { projects } from '../../data/site';
+export function getStaticPaths() {
+  return projects.filter((p) => p.problem).map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+const { p } = Astro.props;
+---
+<Base title={p.title} description={p.summary}>
+  <article class="prose">
+    <h1>{p.title}</h1>
+    <p>{p.summary}</p>
+    <p class="meta">{p.stack.join(', ')}</p>
+    <div class="links">
+      {p.repo && <a href={p.repo}>Source</a>}
+      {p.demo && <a href={p.demo}>Live demo</a>}
+    </div>
+    <h2>Problem</h2><p>{p.problem}</p>
+    {p.decisions && <><h2>Decisions</h2><ul>{p.decisions.map((d) => <li>{d}</li>)}</ul></>}
+    {p.result && <><h2>Result</h2><p>{p.result}</p></>}
+    <p><a href="/#projects">Back to projects</a></p>
+  </article>
+</Base>

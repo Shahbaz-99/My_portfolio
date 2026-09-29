@@ -1,29 +1,25 @@
-# Requirements (Phase 0)
+# Requirements
 
 ## 1. Goal
-Portfolio that shows engineering proof (case studies, ADRs, perf scores) plus one signature interactive 3D hero.
+A fast, static portfolio that proves backend and AI engineering skill through case studies, documented architecture and measured performance.
 
-## 2. Audience & target  — CONFIRM
-- Target: [ ] product companies  [ ] creative agencies  [ ] freelance
-- Three.js skill: [ ] none  [ ] some  [ ] strong
-- Blender skill: [ ] none  [ ] some  [ ] strong
+## 2. Audience and target
+- Target: backend and AI-adjacent internships and full-time roles at product companies
+- Profile: Python, Django, DRF, MySQL, Docker, Linux VPS, CI/CD; AI in progress
+- 3D: out of scope for v1 (ADR 0003)
 
 ## 3. Success metrics
 | Metric | Target |
 |---|---|
 | LCP (mid-range phone, 4G) | < 2.5 s |
-| Lighthouse (perf/a11y/best-practices/SEO) | ≥ 90 each |
-| Contact clicks / recruiter visits | tracked via Cloudflare Web Analytics |
+| Lighthouse (perf, a11y, best practices, SEO) | ≥ 90 each |
+| Contact clicks and recruiter visits | Cloudflare Web Analytics |
 
 ## 4. Scope (v1)
-- Hero: single 3D scene (Three.js + cannon-es physics, Blender assets), lazy-loaded
-- 3–4 case studies (problem, decisions, result, live + source links)
-- Architecture page (ADRs, Lighthouse scores)
-- Contact (Cloudflare Worker or form service)
-- 2D fallback + `prefers-reduced-motion`
+Home, project case studies, AI section, Architecture page, contact by email, resume download.
 
 ## 5. Out of scope (v1)
-Backend/DB, CMS, blog, multi-language.
+Backend for the site, CMS, blog, 3D, multi-language.
 
 ## 6. Constraints
-Free hosting, no server, JS < ~150 KB before 3D loads.
+Free hosting, static output, no client JS framework on the home page.
