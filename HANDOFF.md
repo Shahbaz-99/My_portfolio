@@ -2,6 +2,12 @@
 
 Newest entry on top.
 
+## Phase 5b – Tests
+**Done:** Playwright + axe suite (a11y in light/dark, theme persistence, page smoke, no horizontal overflow at 320-1920px). Raised light-theme muted text contrast to meet WCAG AA.
+**Workflow:** single long-lived `dev` branch; PR into `main` when ready; Cloudflare gives `dev` a preview URL.
+**Open:** Cloudflare Pages connection and CI green (Phase 2 exit), `photo` in `public/`, LinkedIn, resume, project links.
+**Next:** Phase 6 launch (analytics, Lighthouse scores on Architecture page, custom domain optional).
+
 ## Phase 5 – Visual direction v2 (paper, dock, handwritten greeting)
 **Done:** redesigned to a paper-texture look: handwritten greeting, tilted photo frame, live IST clock with seconds, icon chips, 2-up project cards with tinted covers, dashed-line experience timeline, wavy-divider lists, floating bottom dock (home, projects, about, AI, theme toggle) with active red dot. Light and dark themes kept; layout is a single 46rem column, 1-col on phones. Removed the API-response hero and JetBrains Mono. ADR 0006.
 **Open:** add `photo` (e.g. /me.jpg), `year` per project, LinkedIn URL, resume PDF, real project links; first AI project.
