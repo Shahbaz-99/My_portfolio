@@ -1,7 +1,7 @@
 type Repo = { name: string; description: string | null; html_url: string; language: string | null; pushed_at: string; fork: boolean; archived: boolean };
 
 const list = document.querySelector<HTMLUListElement>('[data-gh-list]');
-const status = document.querySelector<HTMLElement>('[data-gh-status]');
+const statusEl = document.querySelector<HTMLElement>('[data-gh-status]');
 
 function ago(iso: string): string {
   const days = Math.round((new Date(iso).getTime() - Date.now()) / 86400000);
@@ -12,7 +12,7 @@ function ago(iso: string): string {
 
 function render(repos: Repo[]) {
   if (!list) return;
-  if (!repos.length) { if (status) status.textContent = 'No public repositories to show yet.'; return; }
+  if (!repos.length) { if (statusEl) statusEl.textContent = 'No public repositories to show yet.'; return; }
   for (const r of repos) {
     if (!r.html_url.startsWith('https://github.com/')) continue;
     const li = document.createElement('li');
@@ -42,7 +42,7 @@ async function load() {
     }
     render(data.filter((r) => !r.fork && !r.archived).slice(0, 4));
   } catch {
-    if (status) status.textContent = 'Could not load repositories right now. Use the link below.';
+    if (statusEl) statusEl.textContent = 'Could not load repositories right now. Use the link below.';
   }
 }
 
@@ -52,3 +52,5 @@ if (list) {
     io.observe(list);
   } else load();
 }
+
+
