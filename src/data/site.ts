@@ -10,7 +10,7 @@ export const site = {
   city: 'Bhopal',
   timezone: 'Asia/Kolkata',
   tzLabel: 'IST',
-  photo: '', // e.g. '/me.jpg' (square, put file in /public); empty shows initials
+  photo: '/me.jpg', // e.g. '/me.jpg' (square, put file in /public); empty shows initials
   initials: 'SA',
   githubUser: 'Shahbaz-99',
   email: 'sahbaj.swn@gmail.com',
@@ -90,3 +90,6 @@ export const education = {
 
 // Add real AI projects here as you ship them.
 export const aiWork: { title: string; summary: string; href?: string }[] = [];
+
+
+
