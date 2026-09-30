@@ -27,16 +27,16 @@ const stack = skills.flatMap((s) => s.items).join(', ');
   </section>
 
   <section id="projects" class="block" aria-labelledby="h-projects">
-    <h2 class="label" id="h-projects">Best projects</h2>
+    <h2 class="label reveal" id="h-projects">Best projects</h2>
     <div class="cards">{projects.map((p, i) => <ProjectCard p={p} i={i} />)}</div>
-    <GitHubActivity />
+    <div class="reveal"><GitHubActivity /></div>
   </section>
 
   <section id="about" class="block" aria-labelledby="h-exp">
-    <h2 class="label" id="h-exp">Experience</h2>
+    <h2 class="label reveal" id="h-exp">Experience</h2>
     <ul class="tl">
-      {timeline.map((t) => (
-        <li>
+      {timeline.map((t, n) => (
+        <li class="reveal" style={`--d:${n}`}>
           <span class="mono" aria-hidden="true">{t.mono}</span>
           <div>
             <div class="top">
@@ -49,17 +49,17 @@ const stack = skills.flatMap((s) => s.items).join(', ');
         </li>
       ))}
     </ul>
-    <p class="meta">Stack: {stack}</p>
+    <p class="meta reveal">Stack: {stack}</p>
   </section>
 
   <section id="ai" class="block" aria-labelledby="h-ai">
-    <h2 class="label" id="h-ai">AI work</h2>
+    <h2 class="label reveal" id="h-ai">AI work</h2>
     {aiWork.length === 0 ? (
-      <p class="empty">I am adding AI engineering to my backend work. Projects will appear here as I ship them, each with source and a write-up.</p>
+      <p class="empty reveal">I am adding AI engineering to my backend work. Projects will appear here as I ship them, each with source and a write-up.</p>
     ) : (
       <ul class="list">
         {aiWork.map((a) => (
-          <li>
+          <li class="reveal">
             <div class="line">{a.href ? <a href={a.href}>{a.title} {'\u2197'}</a> : <span>{a.title}</span>}</div>
             <p class="desc">{a.summary}</p>
           </li>

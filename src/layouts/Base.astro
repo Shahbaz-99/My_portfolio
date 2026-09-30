@@ -4,8 +4,8 @@ import '@fontsource-variable/caveat';
 import '../styles/global.css';
 import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
-interface Props { title?: string; description?: string }
-const { title, description = `${site.name}, ${site.role}. ${site.headline}` } = Astro.props;
+interface Props { title?: string; description?: string; progress?: boolean }
+const { progress = false, title, description = `${site.name}, ${site.role}. ${site.headline}` } = Astro.props;
 const full = title ? `${title} | ${site.name}` : `${site.name} | ${site.role}`;
 const nav = [
   { href: '/#top', icon: 'home', label: 'Home' },
@@ -26,6 +26,7 @@ const nav = [
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <script is:inline>
       (function () {
+        document.documentElement.classList.add('js');
         try {
           var t = localStorage.getItem('theme');
           if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -35,6 +36,7 @@ const nav = [
     </script>
   </head>
   <body>
+    {progress && <div class="progress" aria-hidden="true"></div>}
     <a class="skip" href="#main">Skip to content</a>
     <div class="wrap">
       <main id="main"><slot /></main>
@@ -55,9 +57,9 @@ const nav = [
     </div>
     <nav class="dock" aria-label="Main">
       <div class="dock-items">
-        {nav.map((n) => <a href={n.href} aria-label={n.label} title={n.label}><Icon name={n.icon} /></a>)}
+        {nav.map((n) => <a href={n.href} aria-label={n.label} data-tip={n.label}><Icon name={n.icon} /></a>)}
         <span class="sep" aria-hidden="true"></span>
-        <button type="button" data-theme-toggle aria-label="Switch theme"><Icon class="sun" name="sun" /><Icon class="moon" name="moon" /></button>
+        <button type="button" data-theme-toggle data-tip="Theme" aria-label="Switch theme"><Icon class="sun" name="sun" /><Icon class="moon" name="moon" /></button>
       </div>
       <div class="ruler" aria-hidden="true"></div>
     </nav>
