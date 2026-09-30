@@ -4,7 +4,7 @@ export default defineConfig({
   testDir: 'tests',
   timeout: 15000,
   reporter: 'list',
-  use: { baseURL: 'http://127.0.0.1:4321' },
+  use: { baseURL: 'http://127.0.0.1:4321', reducedMotion: 'reduce' },
   // Locally Playwright starts the server; in CI the workflow does.
   webServer: process.env.CI
     ? undefined

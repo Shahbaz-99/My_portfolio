@@ -2,6 +2,10 @@
 
 Newest entry on top.
 
+## Phase 6a – Case studies, content, motion
+**Done:** clickable case-study pages for all 3 projects (content from LinkedIn/resume, nothing invented), cover-to-hero view transition, scroll reveal, hover effects on cards/dock/chips/timeline/lists, dock tooltips, reading-progress bar, Trainee role and skills added, tests extended to project pages.
+**Open:** LinkedIn URL, resume PDF, repo/demo links and year per project, Cloudflare Pages connection, first AI project.
+
 ## Phase 5b – Tests
 **Done:** Playwright + axe suite (a11y in light/dark, theme persistence, page smoke, no horizontal overflow at 320-1920px). Raised light-theme muted text contrast to meet WCAG AA.
 **Workflow:** single long-lived `dev` branch; PR into `main` when ready; Cloudflare gives `dev` a preview URL.
