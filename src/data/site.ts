@@ -109,30 +109,150 @@ export const projects: Project[] = [
   },
 ];
 
-export const timeline = [
+export const experience = [
   {
-    name: 'Ethical Intelligence',
+    slug: 'backend-intern',
+    org: 'Ethical Intelligence',
+    url: 'https://www.ethicalint.com/',
     mono: 'EI',
     role: 'Backend Developer Intern',
+    type: 'Internship',
     when: 'Aug 2025 - Present',
-    text: 'Developing and maintaining REST APIs with Python, Django and Django REST Framework, implementing authentication and authorization, and containerizing applications with Docker.',
-    url: '',
+    place: 'Bhopal, India (on-site)',
+    summary:
+      'Developing and maintaining REST APIs with Python, Django and Django REST Framework, implementing authentication and authorization, and containerizing applications with Docker.',
+    points: [
+      'Developed and maintained REST APIs with Django and Django REST Framework.',
+      'Implemented authentication and authorization mechanisms.',
+      'Designed database models and optimized application performance.',
+      'Containerized applications with Docker and deployed them on Linux-based VPS servers.',
+      'Used Git and GitHub for version control, with exposure to CI/CD workflows and Kubernetes fundamentals in a collaborative environment.',
+    ],
+    skills: ['Python', 'Django', 'Django REST Framework', 'MySQL', 'Docker', 'Git', 'Postman'],
   },
   {
-    name: 'Ethical Intelligence',
+    slug: 'software-trainee',
+    org: 'Ethical Intelligence',
+    url: 'https://www.ethicalint.com/',
     mono: 'EI',
     role: 'Software Development Trainee',
+    type: 'Part-time',
     when: 'Jan 2025 - Jun 2025',
-    text: 'Completed a six-month training program on backend development fundamentals and practical project implementation.',
-    url: '',
+    place: 'Bhopal, India (on-site)',
+    summary:
+      'Completed a six-month Software Development Training Program focused on backend development fundamentals and practical project implementation.',
+    points: [
+      'Six-month training program in software development.',
+      'Backend development fundamentals with Python and Django REST Framework.',
+      'Hands-on, practical project implementation.',
+    ],
+    skills: ['Python', 'Django', 'Django REST Framework', 'MySQL'],
   },
+];
+
+export const education = [
   {
     name: "All Saints' College of Technology",
     mono: 'AS',
-    role: 'B.Tech, Computer Science Engineering',
+    degree: 'B.Tech, Computer Science Engineering',
     when: '2023 - 2027',
-    text: 'RGPV University, Bhopal. Focused on backend development, databases, system design, data structures, operating systems and networks.',
-    url: '',
+    text: 'RGPV University, Bhopal. Expected to graduate in June 2027. Focused on backend development, database management, system design, data structures, algorithms, operating systems and computer networks.',
+  },
+];
+
+export type Research = {
+  slug: string;
+  title: string;
+  tagline: string;
+  summary: string;
+  kind: string;
+  org: string;
+  url: string;
+  tags: string[];
+  stats: { value: string; label: string }[];
+  toneError: { a: number; b: number };
+  buckets: { label: string; n: number; tone: 'good' | 'neutral' | 'bad' }[];
+  formula: string;
+  sections: { id?: string; title: string; paras?: string[]; items?: { term: string; text: string }[] }[];
+  refs: { cite: string; title: string }[];
+};
+
+export const research: Research[] = [
+  {
+    slug: 'model-drift-supcon',
+    title: 'One input, two models: seeing drift live',
+    tagline: 'A controlled comparison of a baseline and a lifecycle-tuned model, made visible in embedding space.',
+    summary:
+      'A model-comparison environment that places a baseline and a lifecycle-tuned model side by side, making systematic drift and its contrastive correction visible.',
+    kind: 'Internal demo',
+    org: 'Ethical Intelligence',
+    url: 'https://www.ethicalint.com/',
+    tags: ['Side-by-side comparison', 'Contrastive loss', 'Lifecycle fine-tuning'],
+    stats: [
+      { value: '51% to 41%', label: 'Tone error on the full pool of novel candidates, baseline versus tuned model' },
+      { value: '880', label: 'Novel candidates screened, from which 20 queries were curated' },
+      { value: '\u03bb 0.3, \u03c4 0.1', label: 'Weight of the contrastive term and softmax temperature' },
+    ],
+    toneError: { a: 51, b: 41 },
+    buckets: [
+      { label: 'Baseline wrong, tuned right', n: 15, tone: 'good' },
+      { label: 'Both right', n: 3, tone: 'neutral' },
+      { label: 'Both wrong', n: 2, tone: 'bad' },
+    ],
+    formula: 'L_i = -1/|P(i)| \u00b7 \u03a3_{p \u2208 P(i)} log [ exp(z_i \u00b7 z_p / \u03c4) / \u03a3_{a \u2260 i} exp(z_i \u00b7 z_a / \u03c4) ]',
+    sections: [
+      {
+        title: 'How systematic drift appears',
+        paras: [
+          'The baseline, Model A, is trained on standard phrasing only. Drift text, meaning slang, emoji and sarcasm that carry the same sentiment, lands away from its standard counterpart in embedding space, and tone accuracy drops.',
+        ],
+      },
+      {
+        id: 'compare',
+        title: 'Same input, two models',
+        paras: [
+          'Twenty queries were curated from 880 novel candidates: new subjects and templates, deduplicated against the training data, including held-out sarcasm structures. Every query is answered by both models side by side.',
+          'Example: for "the yoga class is straight cringe", the standard-only model replied with cheerful praise, which is the wrong tone. The drift-aware model (drift plus supervised contrastive learning) responded with sympathy, which is the right tone.',
+        ],
+      },
+      {
+        title: 'Contrastive lifecycle: anchor, positives, negatives',
+        paras: [
+          'Each text acts as an anchor. Texts with the same sentiment label are its positives, whether standard or drift phrasing. Texts with the opposite label are its negatives.',
+          'Across epochs, with epoch 0 being the baseline, positives are pulled together and negatives pushed apart, so slang and emoji end up next to the standard phrasing of the same sentiment.',
+        ],
+      },
+      {
+        id: 'math',
+        title: 'The math: how SupCon pulls and pushes',
+        paras: [
+          'Encoder output is mean-pooled and L2-normalized, so every text becomes a point on a unit hypersphere. The total loss is L = L_gen + \u03bb \u00b7 L_SupCon, with \u03bb = 0.3 and temperature \u03c4 = 0.1. For each anchor i, the supervised contrastive loss is:',
+        ],
+        items: [
+          { term: 'Pull', text: 'The numerator holds the positives, so the loss drops as the anchor gets closer to them.' },
+          { term: 'Push', text: 'The denominator also holds the negatives, so the loss drops as their similarity shrinks.' },
+          { term: 'Temperature', text: 'A small \u03c4 sharpens the softmax, so the hardest, closest negatives get the biggest push.' },
+        ],
+      },
+      {
+        title: 'How it is measured',
+        paras: [
+          'All plots share one 2-D frame: the sentiment axis (the difference between class centroids) and the top principal component orthogonal to it, fit once on Model A using standard reference points only.',
+        ],
+        items: [
+          { term: 'Cluster quality', text: 'Silhouette score and intra-class versus inter-class cosine.' },
+          { term: 'Cross-style alignment', text: 'Cosine between the standard and drift centroids of the same class.' },
+          { term: 'Alignment and uniformity', text: 'Geometry of the embedding space, following Wang and Isola (2020).' },
+          { term: 'kNN standard to drift', text: 'Whether the standard-style geometry can classify drift points.' },
+        ],
+      },
+    ],
+    refs: [
+      { cite: 'Khosla et al., 2020', title: 'Supervised Contrastive Learning' },
+      { cite: 'Wang and Isola, 2020', title: 'Understanding Contrastive Representation Learning through Alignment and Uniformity on the Hypersphere' },
+      { cite: 'Gao et al., 2021', title: 'SimCSE: Simple Contrastive Learning of Sentence Embeddings' },
+      { cite: 'Cha et al., 2021', title: 'Co2L: Contrastive Continual Learning' },
+    ],
   },
 ];
 
@@ -143,5 +263,5 @@ export const skills = [
   { group: 'Testing', items: ['Postman'] },
 ];
 
-// Add real AI projects here as you ship them.
+// Extra AI projects (optional); shown under Research when present.
 export const aiWork: { title: string; summary: string; href?: string }[] = [];

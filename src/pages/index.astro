@@ -2,8 +2,9 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import ResearchCard from '../components/ResearchCard.astro';
 import GitHubActivity from '../components/GitHubActivity.astro';
-import { site, projects, timeline, skills, aiWork } from '../data/site';
+import { site, projects, experience, education, research, skills, aiWork } from '../data/site';
 const stack = skills.flatMap((s) => s.items).join(', ');
 ---
 <Base>
@@ -16,7 +17,7 @@ const stack = skills.flatMap((s) => s.items).join(', ');
       <span class="clock" data-clock-wrap aria-hidden="true"><span data-clock={site.timezone}></span> {site.tzLabel}</span>
     </div>
     <p>A backend engineer building REST APIs with Django and turning messy requirements into reliable, well-documented services.</p>
-    <p>Currently interning at {timeline[0].name}, where I ship Dockerized APIs to Linux servers. Learning AI engineering and Kubernetes next.</p>
+    <p>Currently interning at <a class="wavy" href={experience[0].url}>{experience[0].org}</a>, where I ship Dockerized APIs to Linux servers. I also enjoy AI-related research, and I am learning Kubernetes next.</p>
     <p>Most of my code lives on <a class="wavy" href={site.github}>GitHub</a>.</p>
     <div class="chips">
       <a class="chip" href={`mailto:${site.email}`} aria-label="Email"><Icon name="mail" /></a>
@@ -32,31 +33,48 @@ const stack = skills.flatMap((s) => s.items).join(', ');
     <div class="reveal"><GitHubActivity /></div>
   </section>
 
-  <section id="about" class="block" aria-labelledby="h-exp">
+  <section id="experience" class="block" aria-labelledby="h-exp">
     <h2 class="label reveal" id="h-exp">Experience</h2>
     <ul class="tl">
-      {timeline.map((t, n) => (
+      {experience.map((t, n) => (
         <li class="reveal" style={`--d:${n}`}>
           <span class="mono" aria-hidden="true">{t.mono}</span>
-          <div>
-            <div class="top">
-              <span class="name">{t.url ? <a class="wavy" href={t.url}>{t.name}</a> : t.name}</span>
+          <a class="tl-body" href={`/experience/${t.slug}`}>
+            <span class="top">
+              <span class="name">{t.org}</span>
               <span class="when">{t.when}</span>
-            </div>
-            <div class="role">{t.role}</div>
-            <p>{t.text}</p>
-          </div>
+            </span>
+            <span class="role">{t.role}</span>
+            <span class="txt">{t.summary}</span>
+            <span class="go">View details <i aria-hidden="true">→</i></span>
+          </a>
         </li>
       ))}
     </ul>
     <p class="meta reveal">Stack: {stack}</p>
   </section>
 
-  <section id="ai" class="block" aria-labelledby="h-ai">
-    <h2 class="label reveal" id="h-ai">AI work</h2>
-    {aiWork.length === 0 ? (
-      <p class="empty reveal">I am adding AI engineering to my backend work. Projects will appear here as I ship them, each with source and a write-up.</p>
-    ) : (
+  <section id="education" class="block" aria-labelledby="h-edu">
+    <h2 class="label reveal" id="h-edu">Education</h2>
+    <ul class="tl">
+      {education.map((t) => (
+        <li class="reveal">
+          <span class="mono" aria-hidden="true">{t.mono}</span>
+          <div>
+            <div class="top"><span class="name">{t.name}</span><span class="when">{t.when}</span></div>
+            <div class="role">{t.degree}</div>
+            <p>{t.text}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section id="research" class="block" aria-labelledby="h-research">
+    <h2 class="label reveal" id="h-research">Research</h2>
+    <p class="empty reveal">I enjoy AI-related research, especially digging into how models behave and why.</p>
+    <div class="cards">{research.map((r, i) => <ResearchCard r={r} i={i} />)}</div>
+    {aiWork.length > 0 && (
       <ul class="list">
         {aiWork.map((a) => (
           <li class="reveal">

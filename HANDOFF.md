@@ -2,6 +2,10 @@
 
 Newest entry on top.
 
+## Phase 6b – Experience, Education, Research
+**Done:** Experience split into Experience (2 clickable roles, detail pages, company link https://www.ethicalint.com/) and Education; new Research section with a detail page (drift / SupCon comparison, from the shared demo screenshots) and the "I enjoy AI-related research" line; dock now Home, Projects, Experience, Research; tests extended.
+**Open:** confirm permission to publish the internal demo details; add own-role line to the research page; LinkedIn URL; resume PDF; repo/demo links per project; Cloudflare Pages connection.
+
 ## Phase 6a – Case studies, content, motion
 **Done:** clickable case-study pages for all 3 projects (content from LinkedIn/resume, nothing invented), cover-to-hero view transition, scroll reveal, hover effects on cards/dock/chips/timeline/lists, dock tooltips, reading-progress bar, Trainee role and skills added, tests extended to project pages.
 **Open:** LinkedIn URL, resume PDF, repo/demo links and year per project, Cloudflare Pages connection, first AI project.
