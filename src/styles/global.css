@@ -1,14 +1,15 @@
 :root {
-  --bg: #ecebe8;
-  --panel: #fbfaf8;
-  --ink: #232323;
-  --muted: #66655f;
-  --rule: #cfcdc8;
-  --chip: #e2e0dc;
+  --bg: #f4ecdd;
+  --panel: #fcf8ef;
+  --ink: #2b2620;
+  --muted: #675e4f;
+  --rule: #dccfb6;
+  --chip: #eaddc4;
   --accent: #b3261e;
-  --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.08);
+  --shadow: 0 1px 2px rgba(60,40,10,.06), 0 8px 24px rgba(60,40,10,.10);
+  --hl: linear-gradient(color-mix(in srgb, var(--accent) 24%, transparent), color-mix(in srgb, var(--accent) 24%, transparent));
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --grain-op: .4;
+  --grain-op: .22;
   --cs: 55%; --cl: 88%; --cl2: 92%;
   --sans: 'Instrument Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --script: 'Caveat Variable', 'Segoe Script', cursive;
@@ -31,15 +32,13 @@ a { color: inherit; text-underline-offset: 0.3em; }
 .wrap { max-width: 46.5rem; margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 2rem); }
 main { padding-bottom: 5rem; }
 .meta { color: var(--muted); font-size: .95rem; margin: 0; }
-a.wavy { text-decoration: underline wavy var(--muted); text-decoration-thickness: 1px; text-underline-offset: .35em; }
-a.wavy:hover { text-decoration-color: var(--accent); }
 
 /* hero */
 .hero { padding-top: clamp(2rem, 6vw, 3.5rem); }
 .polaroid { width: 4.75rem; aspect-ratio: 1; background: #f7f5f0; padding: .3rem; border-radius: 4px; transform: rotate(-6deg); box-shadow: var(--shadow); }
 .polaroid img, .polaroid .ph { width: 100%; height: 100%; display: grid; place-items: center; object-fit: cover; border-radius: 2px; }
 .polaroid img { filter: grayscale(1); }
-.polaroid .ph { background: #dcd9d2; color: #3c3a37; font: 400 1.7rem/1 var(--script); }
+.polaroid .ph { background: #e6d9c0; color: #3d352a; font: 400 1.7rem/1 var(--script); }
 .greet { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-top: 1.75rem; }
 .hello { margin: 0; font: 400 clamp(2rem, 5vw, 2.5rem)/1.1 var(--script); color: var(--accent); }
 .clock { color: var(--muted); font-size: .95rem; font-variant-numeric: tabular-nums; white-space: nowrap; visibility: hidden; }
@@ -91,7 +90,6 @@ a.wavy:hover { text-decoration-color: var(--accent); }
 :root { --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='6'%3E%3Cpath d='M0 3Q3 0 6 3T12 3' fill='none' stroke='black' stroke-width='1'/%3E%3C/svg%3E"); }
 .list .line { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
 .list a { text-decoration: none; }
-.list a:hover { text-decoration: underline wavy var(--muted); text-underline-offset: .35em; }
 .list .when { color: var(--muted); font-size: .95rem; white-space: nowrap; }
 .list .desc { color: var(--muted); font-size: .95rem; margin: .1rem 0 0; }
 .empty { color: var(--muted); margin: 0; max-width: 55ch; }
@@ -231,7 +229,6 @@ a.wavy:hover { text-decoration-color: var(--accent); }
   .dec li:hover { transform: translateX(4px); border-left-color: var(--accent); }
   .next:hover { transform: translateY(-3px); }
   .doodle:hover { transform: scale(1.06) rotate(-2deg); }
-  a.wavy:hover { text-decoration-thickness: 2px; }
 }
 
 /* ---------- experience / research ---------- */
@@ -269,10 +266,22 @@ a.wavy:hover { text-decoration-color: var(--accent); }
   .fill, .seg { transition: transform .9s cubic-bezier(.2, .7, .2, 1) .25s; }
   .js .reveal:not(.in) .fill, .js .reveal:not(.in) .seg { transform: scaleX(0); }
   .stat { transition: transform .35s cubic-bezier(.2, .7, .2, 1), box-shadow .35s; }
-  .tl-body .name { transition: text-decoration-color .2s; }
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .tl-body:hover .go i { transform: translateX(5px); }
-  .tl-body:hover .name { text-decoration: underline wavy var(--muted); text-underline-offset: .35em; text-decoration-thickness: 1px; }
   .stat:hover { transform: translateY(-3px); }
+}
+
+/* ---------- links: highlighter sweep instead of underline ---------- */
+a.lnk { color: var(--ink); font-weight: 500; text-decoration: none; background-image: var(--hl); background-repeat: no-repeat; background-position: 0 100%; background-size: 100% .38em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+a.lnk:hover, a.lnk:focus-visible { background-size: 100% 100%; }
+a.lnk[href^='http']::after { content: '\2197'; display: inline-block; margin-left: .2em; font-size: .8em; opacity: .65; }
+.list a { text-decoration: none; }
+.list a, .tl-body .name { background-image: var(--hl); background-repeat: no-repeat; background-position: 0 100%; background-size: 0 100%; }
+@media (hover: hover) { .list a:hover, .tl-body:hover .name { background-size: 100% 100%; } }
+.list a:focus-visible, .tl-body:focus-visible .name { background-size: 100% 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  a.lnk, .list a, .tl-body .name { transition: background-size .35s cubic-bezier(.2, .7, .2, 1); }
+  a.lnk[href^='http']::after { transition: transform .25s cubic-bezier(.2, .7, .2, 1), opacity .2s; }
+  a.lnk:hover::after { transform: translate(2px, -2px); opacity: 1; }
 }

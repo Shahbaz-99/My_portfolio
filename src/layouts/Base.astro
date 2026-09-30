@@ -5,7 +5,7 @@ import '../styles/global.css';
 import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
 interface Props { title?: string; description?: string; progress?: boolean }
-const { progress = false, title, description = `${site.name}, ${site.role}. ${site.headline}` } = Astro.props;
+const { progress = false, title, description = site.description } = Astro.props;
 const full = title ? `${title} | ${site.name}` : `${site.name} | ${site.role}`;
 const nav = [
   { href: '/#top', icon: 'home', label: 'Home' },
@@ -47,7 +47,7 @@ const nav = [
             <g transform={`translate(${x} ${y})`}><circle r="2.5"/>{[0, 60, 120, 180, 240, 300].map((a) => <ellipse cx="0" cy="-7" rx="2.6" ry="5" transform={`rotate(${a})`}/>)}</g>
           ))}
         </svg>
-        <p>Built with Astro on Cloudflare Pages. <a class="wavy" href="/architecture">How it's built</a></p>
+        <p>Built with Astro on Cloudflare Pages. <a class="lnk" href="/architecture">How it's built</a></p>
         <div class="chips">
           <a class="chip" href={`mailto:${site.email}`} aria-label="Email"><Icon name="mail" /></a>
           {site.linkedin && <a class="chip" href={site.linkedin} aria-label="LinkedIn"><Icon name="linkedin" /></a>}

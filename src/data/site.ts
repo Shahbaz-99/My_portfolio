@@ -1,10 +1,10 @@
 // Single source of truth. Edit here; every page reads from this file.
 export const site = {
   name: 'Sahbaj Ali', // matches official ID; goes by Shahbaz in person
-  role: 'Python backend developer',
-  headline: 'Backend engineer building reliable APIs, now adding AI to them.',
-  intro:
-    'I design and ship REST APIs with Django and Django REST Framework, containerize them with Docker, and deploy them on Linux servers.',
+  role: 'Backend Developer Intern',
+  headline: 'Backend Developer Intern @ Ethical Intelligence | API Development, Docker, AI Enthusiast',
+  description:
+    'Computer Science Engineering student with hands-on experience in Python, Django, and Django REST Framework. Skilled in developing REST APIs, working with databases, and deploying applications using Docker.',
   location: 'Bhopal, India',
   city: 'Bhopal',
   timezone: 'Asia/Kolkata',
@@ -39,46 +39,43 @@ export const projects: Project[] = [
   {
     slug: 'incident-management',
     title: 'Incident Management System',
-    tagline: 'Role-based incident tracking, from report to resolution.',
-    summary:
-      'A backend system for reporting, tracking and resolving incidents across organizational roles, secured with JWT and role-based access control.',
+    summary: 'Designed and developed a backend system for reporting, tracking, and resolving incidents across organizational roles.',
     stack: ['Python', 'Django', 'Django REST Framework', 'JWT', 'SQLite'],
     problem:
-      'Organizations need one place to report incidents, assign them to the right people and follow them through to resolution, while making sure each person can only do what their role allows. I designed and built the backend for that: APIs for incident creation, assignment, status updates and resolution, with authentication and permissions enforced at the application level.',
+      'Designed and developed a backend system for reporting, tracking, and resolving incidents across organizational roles. Implemented JWT-based authentication and role-based authorization to ensure secure access control for Admins, POCs, and Employees. Built APIs for incident creation, assignment, status updates, and resolution workflows. Focused on designing a maintainable API structure and enforcing permissions at the application level to support different user responsibilities.',
     roles: ['Admin', 'POC', 'Employee'],
     highlights: [
-      { title: 'JWT authentication', text: 'Token-based sign-in secures access to the APIs.' },
-      { title: 'Role-based access control', text: 'Admins, POCs and Employees each get the permissions their role needs.' },
-      { title: 'Incident lifecycle management', text: 'Creation, assignment, status updates and resolution as first-class workflows.' },
-      { title: 'RESTful API design', text: 'A maintainable API structure built around the incident workflow.' },
-      { title: 'Secure authorization flow', text: 'Permissions are enforced at the application level to match each user responsibility.' },
+      { title: 'JWT Authentication', text: 'JWT-based authentication for secure access.' },
+      { title: 'Role-Based Access Control (RBAC)', text: 'Role-based authorization for Admins, POCs, and Employees.' },
+      { title: 'Incident Lifecycle Management', text: 'APIs for incident creation, assignment, status updates, and resolution workflows.' },
+      { title: 'RESTful API Design', text: 'A maintainable API structure.' },
+      { title: 'Secure Authorization Flow', text: 'Permissions enforced at the application level to support different user responsibilities.' },
     ],
     flow: [
       { title: 'Create', text: 'An incident is reported.' },
-      { title: 'Assign', text: 'It is routed to the right person.' },
-      { title: 'Update', text: 'Status moves as work progresses.' },
-      { title: 'Resolve', text: 'The incident is resolved and closed.' },
+      { title: 'Assign', text: 'It is assigned to the right person.' },
+      { title: 'Update', text: 'Status is updated as work progresses.' },
+      { title: 'Resolve', text: 'The incident is resolved.' },
     ],
     decisions: [
-      'JWT for authentication, so every API request carries a verifiable identity.',
-      'Role-based authorization enforced at the application level, separating what Admins, POCs and Employees can do.',
-      'A maintainable API structure organized around the incident lifecycle.',
+      'JWT-based authentication for secure access to the APIs.',
+      'Role-based authorization enforced at the application level for Admins, POCs, and Employees.',
+      'A maintainable API structure organized around the incident workflow.',
     ],
   },
   {
     slug: 'menumint',
     title: 'MenuMint QR Code Generator',
-    tagline: 'Print-ready QR codes for restaurant menus.',
-    summary:
-      'A web application that generates downloadable QR codes linked to restaurant menu URLs, for contactless menu access.',
-    stack: ['Python', 'Django', 'QRCode library'],
+    tagline: 'Download crisp, print-ready QR codes \u2014 perfect for standees, table cards, and menus.',
+    summary: 'Built a web application that generates downloadable QR codes linked to restaurant menu URLs.',
+    stack: ['Python', 'Django', 'QRCode Library'],
     problem:
-      'Restaurants that want contactless menus need a QR code that reliably points to their menu and can be printed. I built a lightweight Django application that takes a menu URL, validates it and generates a QR code image that can be downloaded and used on standees, table cards and menus.',
+      'Built a web application that generates downloadable QR codes linked to restaurant menu URLs. Designed the backend logic for QR generation and data handling while keeping the workflow simple and efficient. The application enables restaurants to create QR codes that can be printed and used for contactless menu access.',
     highlights: [
-      { title: 'QR code generation', text: 'Turns a menu URL into a scannable QR code.' },
-      { title: 'URL validation', text: 'Checks the link before a code is generated.' },
-      { title: 'Downloadable QR images', text: 'Crisp, print-ready images for standees, table cards and menus.' },
-      { title: 'Lightweight application design', text: 'A simple, efficient workflow with few moving parts.' },
+      { title: 'QR Code Generation', text: 'Generates QR codes linked to restaurant menu URLs.' },
+      { title: 'URL Validation', text: 'Validates the menu URL before a code is generated.' },
+      { title: 'Downloadable QR Images', text: 'Print-ready images for standees, table cards, and menus.' },
+      { title: 'Lightweight Application Design', text: 'Backend logic for QR generation and data handling, kept simple and efficient.' },
     ],
     flow: [
       { title: 'Enter URL', text: 'Paste the restaurant menu link.' },
@@ -87,24 +84,22 @@ export const projects: Project[] = [
       { title: 'Download', text: 'Save the image and print it.' },
     ],
     decisions: [
-      'Keep the workflow simple and efficient: one input, one output.',
-      'Validate URLs up front so a printed code does not point to a bad link.',
+      'Keep the workflow simple and efficient.',
       'Handle QR generation and data handling in the backend.',
+      'Enable restaurants to print the code for contactless menu access.',
     ],
   },
   {
     slug: 'employee-management',
     title: 'Employee Management System',
-    tagline: 'The same idea built twice: as a CLI and as a web app.',
-    summary:
-      'A CLI app and a web app for managing employee records, both with complete CRUD and a MySQL backend.',
+    summary: 'Developed CLI and web-based employee management applications with complete CRUD operations and MySQL integration.',
     stack: ['Python', 'Django', 'MySQL'],
     problem:
-      'Employee records need to be created, viewed, updated and deleted reliably. I built this domain twice, as a command-line application and as a Django web application, both storing data in MySQL.',
+      'Developed CLI and web-based employee management applications with complete CRUD operations and MySQL integration.',
     highlights: [
-      { title: 'Complete CRUD', text: 'Create, view, update and delete employee records.' },
-      { title: 'Two interfaces', text: 'A CLI app and a web app for the same records.' },
-      { title: 'MySQL integration', text: 'Records are persisted in a MySQL database.' },
+      { title: 'Complete CRUD Operations', text: 'Create, view, update, and delete employee records.' },
+      { title: 'CLI and Web-Based Applications', text: 'The same idea built as a command-line app and as a web app.' },
+      { title: 'MySQL Integration', text: 'Records stored in a MySQL database.' },
     ],
   },
 ];
@@ -119,16 +114,19 @@ export const experience = [
     type: 'Internship',
     when: 'Aug 2025 - Present',
     place: 'Bhopal, India (on-site)',
-    summary:
-      'Developing and maintaining REST APIs with Python, Django and Django REST Framework, implementing authentication and authorization, and containerizing applications with Docker.',
+    summary: 'Contributing to backend development and API implementation using Python, Django, and Django REST Framework.',
+    overview:
+      'During my internship at Ethical Intelligence, I worked on backend development using Python, Django, and Django REST Framework. I developed and maintained REST APIs, designed database models, and optimized application performance. I also containerized applications using Docker, deployed them on Linux-based VPS servers, and used Git and GitHub for version control. Additionally, I gained exposure to CI/CD workflows and Kubernetes fundamentals while working in a collaborative development environment.',
     points: [
-      'Developed and maintained REST APIs with Django and Django REST Framework.',
+      'Worked on backend development using Python, Django, and Django REST Framework.',
+      'Developed and maintained REST APIs.',
       'Implemented authentication and authorization mechanisms.',
       'Designed database models and optimized application performance.',
-      'Containerized applications with Docker and deployed them on Linux-based VPS servers.',
-      'Used Git and GitHub for version control, with exposure to CI/CD workflows and Kubernetes fundamentals in a collaborative environment.',
+      'Containerized applications using Docker and deployed them on Linux-based VPS servers.',
+      'Used Git and GitHub for version control.',
+      'Gained exposure to CI/CD workflows and Kubernetes fundamentals while working in a collaborative development environment.',
     ],
-    skills: ['Python', 'Django', 'Django REST Framework', 'MySQL', 'Docker', 'Git', 'Postman'],
+    skills: ['Python', 'Django', 'Django REST Framework', 'Docker', 'Git', 'Postman'],
   },
   {
     slug: 'software-trainee',
@@ -142,9 +140,8 @@ export const experience = [
     summary:
       'Completed a six-month Software Development Training Program focused on backend development fundamentals and practical project implementation.',
     points: [
-      'Six-month training program in software development.',
-      'Backend development fundamentals with Python and Django REST Framework.',
-      'Hands-on, practical project implementation.',
+      'Completed a six-month Software Development Training Program.',
+      'Focused on backend development fundamentals and practical project implementation.',
     ],
     skills: ['Python', 'Django', 'Django REST Framework', 'MySQL'],
   },
@@ -154,9 +151,9 @@ export const education = [
   {
     name: "All Saints' College of Technology",
     mono: 'AS',
-    degree: 'B.Tech, Computer Science Engineering',
+    degree: 'Bachelor of Technology, Computer Science Engineering',
     when: '2023 - 2027',
-    text: 'RGPV University, Bhopal. Expected to graduate in June 2027. Focused on backend development, database management, system design, data structures, algorithms, operating systems and computer networks.',
+    text: 'RGPV University, Bhopal. Expected to graduate in June 2027. Dedicated to mastering backend development, database management, and system design concepts, while actively enhancing knowledge of data structures, algorithms, operating systems, and computer networks to build scalable, real-world applications.',
   },
 ];
 
@@ -257,9 +254,9 @@ export const research: Research[] = [
 ];
 
 export const skills = [
-  { group: 'Backend', items: ['Python', 'Django', 'Django REST Framework', 'REST APIs', 'JWT', 'OOP'] },
-  { group: 'Data', items: ['MySQL', 'SQLite'] },
-  { group: 'Delivery', items: ['Docker', 'Linux', 'Git and GitHub', 'CI/CD', 'Kubernetes (basics)', 'Prometheus'] },
+  { group: 'Backend', items: ['Python', 'Django', 'Django REST Framework', 'REST APIs', 'OOP'] },
+  { group: 'Data', items: ['MySQL'] },
+  { group: 'Delivery', items: ['Docker', 'Linux', 'Git & GitHub', 'Kubernetes (Basics)', 'Prometheus'] },
   { group: 'Testing', items: ['Postman'] },
 ];
 

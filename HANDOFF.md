@@ -2,6 +2,10 @@
 
 Newest entry on top.
 
+## Phase 6c – Beige theme, link style, content match
+**Done:** light theme is now warm beige; underlines replaced by a highlighter sweep on hover/focus (external links get a moving arrow); all descriptive copy (hero, experience, education, projects, skills, headline) now uses the wording from the resume and LinkedIn profile. The AI-research line is kept because it was requested.
+**Open:** LinkedIn URL, resume PDF, repo/demo links per project; permission check for the research page; deployment (Cloudflare Pages) is next.
+
 ## Phase 6b – Experience, Education, Research
 **Done:** Experience split into Experience (2 clickable roles, detail pages, company link https://www.ethicalint.com/) and Education; new Research section with a detail page (drift / SupCon comparison, from the shared demo screenshots) and the "I enjoy AI-related research" line; dock now Home, Projects, Experience, Research; tests extended.
 **Open:** confirm permission to publish the internal demo details; add own-role line to the research page; LinkedIn URL; resume PDF; repo/demo links per project; Cloudflare Pages connection.

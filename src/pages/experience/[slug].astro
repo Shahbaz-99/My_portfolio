@@ -21,7 +21,7 @@ const { e, next } = Astro.props;
     </header>
     <section>
       <h2 class="label reveal">Overview</h2>
-      <p class="reveal">{e.summary}</p>
+      <p class="reveal">{e.overview ?? e.summary}</p>
     </section>
     <section>
       <h2 class="label reveal">What I did</h2>

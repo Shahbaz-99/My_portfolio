@@ -16,9 +16,9 @@ const stack = skills.flatMap((s) => s.items).join(', ');
       <h1 class="hello">{site.name.split(' ')[0]} here!</h1>
       <span class="clock" data-clock-wrap aria-hidden="true"><span data-clock={site.timezone}></span> {site.tzLabel}</span>
     </div>
-    <p>A backend engineer building REST APIs with Django and turning messy requirements into reliable, well-documented services.</p>
-    <p>Currently interning at <a class="wavy" href={experience[0].url}>{experience[0].org}</a>, where I ship Dockerized APIs to Linux servers. I also enjoy AI-related research, and I am learning Kubernetes next.</p>
-    <p>Most of my code lives on <a class="wavy" href={site.github}>GitHub</a>.</p>
+    <p>{site.description}</p>
+    <p>Currently contributing as a Backend Developer Intern at <a class="lnk" href={experience[0].url}>{experience[0].org}</a>, where the focus is on developing and maintaining REST APIs, implementing authentication and authorization mechanisms, and containerizing applications using Docker.</p>
+    <p>Strong interest in backend development, problem-solving, and building reliable software solutions. I also enjoy AI-related research.</p>
     <div class="chips">
       <a class="chip" href={`mailto:${site.email}`} aria-label="Email"><Icon name="mail" /></a>
       {site.linkedin && <a class="chip" href={site.linkedin} aria-label="LinkedIn"><Icon name="linkedin" /></a>}
