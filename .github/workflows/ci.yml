@@ -22,7 +22,7 @@ jobs:
       - name: Start preview server
         run: nohup pnpm exec astro preview --host 127.0.0.1 --port 4321 > preview.log 2>&1 &
       - name: Wait for server
-        run: curl -s --retry 20 --retry-delay 1 --retry-connrefused -o /dev/null http://127.0.0.1:4321
+        run: curl -s --retry 20 --retry-delay 1 --retry-connrefused -o /dev/null http://127.0.0.1:4321/My_portfolio/
       - name: E2E tests
         run: pnpm exec playwright test
         timeout-minutes: 5

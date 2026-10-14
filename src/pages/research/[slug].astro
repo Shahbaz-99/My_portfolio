@@ -7,10 +7,11 @@ export function getStaticPaths() {
 }
 const { r } = Astro.props;
 const total = r.buckets.reduce((s, b) => s + b.n, 0);
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 <Base title={r.title} description={r.summary} progress>
   <article class="case" style="--h:165">
-    <a class="back" href="/#research"><span aria-hidden="true">←</span> Back to research</a>
+    <a class="back" href={`${base}#research`}><span aria-hidden="true">←</span> Back to research</a>
     <ResearchCover slug={r.slug} large badge={r.kind} />
     <header class="case-head">
       <h1>{r.title}</h1>

@@ -1,15 +1,17 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
+const base = '/My_portfolio';
+
 const pages = [
-  '/',
-  '/architecture',
-  '/projects/incident-management',
-  '/projects/menumint',
-  '/projects/employee-management',
-  '/experience/backend-intern',
-  '/experience/software-trainee',
-  '/research/model-drift-supcon',
+  `${base}/`,
+  `${base}/architecture`,
+  `${base}/projects/incident-management`,
+  `${base}/projects/menumint`,
+  `${base}/projects/employee-management`,
+  `${base}/experience/backend-intern`,
+  `${base}/experience/software-trainee`,
+  `${base}/research/model-drift-supcon`,
 ];
 
 for (const path of pages) {
@@ -25,7 +27,7 @@ for (const path of pages) {
 }
 
 test('theme toggle switches and persists', async ({ page }) => {
-  await page.goto('/');
+  await page.goto(`${base}/`);
   await page.evaluate(() => localStorage.setItem('theme', 'light'));
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
@@ -36,7 +38,7 @@ test('theme toggle switches and persists', async ({ page }) => {
 });
 
 test('home has greeting, projects and dock', async ({ page }) => {
-  await page.goto('/');
+  await page.goto(`${base}/`);
   await expect(page.getByRole('heading', { level: 1 })).toContainText('here!');
   await expect(page.locator('#projects .card')).toHaveCount(3);
   await expect(page.locator('#research .card')).toHaveCount(1);
@@ -44,7 +46,7 @@ test('home has greeting, projects and dock', async ({ page }) => {
 });
 
 test('project card opens its case study', async ({ page }) => {
-  await page.goto('/');
+  await page.goto(`${base}/`);
   await page.locator('.card').first().click();
   await expect(page).toHaveURL(/\/projects\/incident-management$/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Incident Management System');
@@ -52,21 +54,21 @@ test('project card opens its case study', async ({ page }) => {
 });
 
 test('experience item opens its detail page', async ({ page }) => {
-  await page.goto('/');
+  await page.goto(`${base}/`);
   await page.locator('.tl-body').first().click();
   await expect(page).toHaveURL(/\/experience\/backend-intern$/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Backend Developer Intern');
 });
 
 test('research card opens the research page', async ({ page }) => {
-  await page.goto('/');
+  await page.goto(`${base}/`);
   await page.locator('#research .card').first().click();
   await expect(page).toHaveURL(/\/research\/model-drift-supcon$/);
   await expect(page.getByRole('heading', { name: 'The math: how SupCon pulls and pushes' })).toBeVisible();
 });
 
 test('architecture page loads', async ({ page }) => {
-  await page.goto('/architecture');
+  await page.goto(`${base}/architecture`);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('How this site is built');
 });
 
@@ -84,7 +86,7 @@ for (const width of [320, 390, 768, 1280, 1920]) {
 test.describe('motion', () => {
   test.use({ reducedMotion: 'no-preference' });
   test('cards reveal when scrolled into view', async ({ page }) => {
-    await page.goto('/');
+    await page.goto(`${base}/`);
     const card = page.locator('.card').first();
     await card.scrollIntoViewIfNeeded();
     await expect(card).toHaveClass(/\bin\b/);

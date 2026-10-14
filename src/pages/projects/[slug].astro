@@ -9,10 +9,11 @@ export function getStaticPaths() {
   }));
 }
 const { p, i, next } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 <Base title={p.title} description={p.summary} progress>
   <article class="case" style={`--h:${(i * 130 + 250) % 360}`}>
-    <a class="back" href="/#projects"><span aria-hidden="true">←</span> Back to projects</a>
+    <a class="back" href={`${base}#projects`}><span aria-hidden="true">←</span> Back to projects</a>
     <Cover p={p} i={i} large />
     <header class="case-head">
       <h1>{p.title}</h1>
@@ -75,7 +76,7 @@ const { p, i, next } = Astro.props;
     )}
 
     {next.slug !== p.slug && (
-      <a class="next reveal" href={`/projects/${next.slug}`}>
+      <a class="next reveal" href={`${base}projects/${next.slug}`}>
         <span class="meta">Next project</span>
         <span class="next-title">{next.title} <span class="arr" aria-hidden="true">→</span></span>
       </a>

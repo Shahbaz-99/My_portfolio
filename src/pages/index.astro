@@ -6,11 +6,12 @@ import ResearchCard from '../components/ResearchCard.astro';
 import GitHubActivity from '../components/GitHubActivity.astro';
 import { site, projects, experience, education, research, skills, aiWork } from '../data/site';
 const stack = skills.flatMap((s) => s.items).join(', ');
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 <Base>
   <section id="top" class="hero">
     <div class="polaroid">
-      {site.photo ? <img src={site.photo} alt={`Portrait of ${site.name}`} width="76" height="76" /> : <span class="ph" aria-hidden="true">{site.initials}</span>}
+      {site.photo ? <img src={`${base}${site.photo.replace(/^\//, '')}`} alt={`Portrait of ${site.name}`} width="76" height="76" /> : <span class="ph" aria-hidden="true">{site.initials}</span>}
     </div>
     <div class="greet">
       <h1 class="hello">{site.name.split(' ')[0]} here!</h1>
@@ -39,7 +40,7 @@ const stack = skills.flatMap((s) => s.items).join(', ');
       {experience.map((t, n) => (
         <li class="reveal" style={`--d:${n}`}>
           <span class="mono" aria-hidden="true">{t.mono}</span>
-          <a class="tl-body" href={`/experience/${t.slug}`}>
+          <a class="tl-body" href={`${base}experience/${t.slug}`}>
             <span class="top">
               <span class="name">{t.org}</span>
               <span class="when">{t.when}</span>

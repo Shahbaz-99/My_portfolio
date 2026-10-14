@@ -18,7 +18,7 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
 sync();
 
 // Active section in dock
-const links = [...document.querySelectorAll<HTMLAnchorElement>('.dock a[href^="/#"]')];
+const links = [...document.querySelectorAll<HTMLAnchorElement>('.dock a[href*="#"]')];
 if (links.length && 'IntersectionObserver' in window) {
   const byId = new Map(links.map((a) => [a.hash.slice(1), a]));
   const io = new IntersectionObserver((entries) => {

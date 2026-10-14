@@ -8,10 +8,11 @@ export function getStaticPaths() {
   }));
 }
 const { e, next } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 <Base title={`${e.role}, ${e.org}`} description={e.summary} progress>
   <article class="case">
-    <a class="back" href="/#experience"><span aria-hidden="true">←</span> Back to experience</a>
+    <a class="back" href={`${base}#experience`}><span aria-hidden="true">←</span> Back to experience</a>
     <header class="case-head exp-head">
       <span class="mono lg" aria-hidden="true">{e.mono}</span>
       <h1>{e.role}</h1>
@@ -32,7 +33,7 @@ const { e, next } = Astro.props;
       <ul class="tags reveal">{e.skills.map((s) => <li>{s}</li>)}</ul>
     </section>
     {next.slug !== e.slug && (
-      <a class="next reveal" href={`/experience/${next.slug}`}>
+      <a class="next reveal" href={`${base}experience/${next.slug}`}>
         <span class="meta">Also at {next.org}</span>
         <span class="next-title">{next.role} <span class="arr" aria-hidden="true">→</span></span>
       </a>
