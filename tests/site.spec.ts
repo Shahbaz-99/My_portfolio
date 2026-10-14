@@ -1,7 +1,16 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-const pages = ['/', '/architecture', '/projects/incident-management', '/projects/menumint', '/projects/employee-management'];
+const pages = [
+  '/',
+  '/architecture',
+  '/projects/incident-management',
+  '/projects/menumint',
+  '/projects/employee-management',
+  '/experience/backend-intern',
+  '/experience/software-trainee',
+  '/research/model-drift-supcon',
+];
 
 for (const path of pages) {
   for (const theme of ['light', 'dark'] as const) {
@@ -29,7 +38,8 @@ test('theme toggle switches and persists', async ({ page }) => {
 test('home has greeting, projects and dock', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('here!');
-  await expect(page.locator('.card')).toHaveCount(3);
+  await expect(page.locator('#projects .card')).toHaveCount(3);
+  await expect(page.locator('#research .card')).toHaveCount(1);
   await expect(page.locator('.dock a')).toHaveCount(4);
 });
 
@@ -39,6 +49,20 @@ test('project card opens its case study', async ({ page }) => {
   await expect(page).toHaveURL(/\/projects\/incident-management$/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Incident Management System');
   await expect(page.getByRole('heading', { name: 'Key highlights' })).toBeVisible();
+});
+
+test('experience item opens its detail page', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('.tl-body').first().click();
+  await expect(page).toHaveURL(/\/experience\/backend-intern$/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Backend Developer Intern');
+});
+
+test('research card opens the research page', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('#research .card').first().click();
+  await expect(page).toHaveURL(/\/research\/model-drift-supcon$/);
+  await expect(page.getByRole('heading', { name: 'The math: how SupCon pulls and pushes' })).toBeVisible();
 });
 
 test('architecture page loads', async ({ page }) => {
